@@ -1,0 +1,37 @@
+{
+  "devDependencies": {
+    "@types/node": "^14.14.27"
+  },
+  "name": "wheels-lite",
+  "description": "A feature-packed yet unopinionated Typescript framework.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avidcoder123/wheels-lite.git"
+  },
+  "keywords": [
+    "full-featured",
+    "backend"
+  ],
+  "author": "AvidCoder123",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/avidcoder123/wheels-lite/issues"
+  },
+  "homepage": "https://github.com/avidcoder123/wheels-lite#readme",
+  "dependencies": {
+    "@medley/router": "^0.2.1",
+    "@poppinss/cliui": "^2.1.1",
+    "co-compose": "^6.1.0",
+    "throng": "^5.0.0",
+    "youch": "^2.1.1",
+    "youch-terminal": "^1.0.1"
+  }
+}
