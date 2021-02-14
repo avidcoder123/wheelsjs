@@ -6,9 +6,16 @@ export interface ServerOptions {
 }
 
 export class App {
+
+    private middlewares: Function[]
+
     public start(options: ServerOptions): void {
         const server = createServer(function(req, res){
             res.end("Hello, world!");
         })
+    }
+
+    public use(middleware: Function): void {
+        this.middlewares.push(middleware);
     }
 }
