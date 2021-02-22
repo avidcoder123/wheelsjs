@@ -29,7 +29,10 @@
   "dependencies": {
     "@medley/router": "^0.2.1",
     "@poppinss/cliui": "^2.1.1",
+    "@poppinss/request": "^1.0.14",
+    "@poppinss/response": "^1.1.1",
     "co-compose": "^6.1.0",
+    "proxy-addr": "^2.0.6",
     "throng": "^5.0.0",
     "youch": "^2.1.1",
     "youch-terminal": "^1.0.1"
