@@ -44,7 +44,7 @@ export class Server {
                 }
             }
         }).listen(this.options.port, "0.0.0.0")
-        logger.success(`Wheels.js HTTP server listening on 0.0.0.0:${this.options.port}`)
+        logger.success(`HTTP server listening on 0.0.0.0:${this.options.port}`)
     }
 
     private async finalHandler(ctx: HttpContext){
