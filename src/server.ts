@@ -1,8 +1,8 @@
 'use strict'
 
-import { IncomingMessage, ServerResponse, createServer } from 'http'
+import { createServer } from 'http'
 import { ServerOptions } from '.'
-import { HttpContextController, HttpContext } from './context'
+import { HttpContextContract, HttpContext } from './context'
 import { Middleware } from 'co-compose'
 import { logger } from './logger'
 import { env } from 'process'
@@ -19,7 +19,7 @@ export class Server {
 
     public async start(): Promise<void> {
         createServer(async (req,res) => {
-            let ctx = HttpContextController.generate(req, res)
+            let ctx = HttpContextContract.generate(req, res)
             const middleware = new Middleware()
             middleware.register(this.middlewares)
             try {

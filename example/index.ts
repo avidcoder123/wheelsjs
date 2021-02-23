@@ -1,13 +1,15 @@
 import { App, ServerOptions } from "../src"
 import { HttpContext } from '../src/context'
+import { Router } from '../src/router'
 
 const app = new App()
 
-app.use(async function(ctx: HttpContext, next){
-    ctx.response.send("HELLO WORLD")
-    throw new Error("Some weird error")
-    await next()
+Router.get('/:id',async function(ctx: HttpContext){
+    ctx.response.send("Recieved param id: " + ctx.request.params.id)
 })
+
+app.use(Router.handle)
+
 
 app.start({
     port: 8080

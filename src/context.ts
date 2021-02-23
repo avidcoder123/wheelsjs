@@ -9,7 +9,7 @@ export interface HttpContext {
     response: Response
 }
 
-export class HttpContextController {
+export class HttpContextContract {
 
     private static readonly req_config: RequestConfigContract = {
         allowMethodSpoofing: false,
