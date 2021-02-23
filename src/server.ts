@@ -14,7 +14,7 @@ export class Server {
 
     constructor(
         private options: ServerOptions,
-        private middlewares: Function[]
+        public middlewares: Array<(ctx: HttpContext, next) => Promise<void>>
     ){}
 
     public async start(): Promise<void> {

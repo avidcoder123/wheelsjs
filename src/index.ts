@@ -8,6 +8,8 @@
 
 import { logger } from './logger'
 import { Server } from './server'
+import { Router } from './router'
+import { HttpContext } from './context'
 
 export interface ServerOptions {
     port: number
@@ -15,7 +17,7 @@ export interface ServerOptions {
 
 export class App {
 
-    private middlewares: Function[] = []
+    public middlewares: Array<(ctx: HttpContext, next) => Promise<void>> = [Router.handle]
 
     public async start(options: ServerOptions): Promise<void> {
         if(options.port) {
@@ -27,7 +29,11 @@ export class App {
         }
     }
 
-    public use(middleware: Function): void {
-        this.middlewares.push(middleware);
+    public before(middleware: (ctx: HttpContext, next) => Promise<void>): void {
+        this.middlewares.unshift(middleware);
+    }
+
+    public after(middleware: (ctx: HttpContext, next) => Promise<void>): void {
+        this.middlewares.push(middleware)
     }
 }
