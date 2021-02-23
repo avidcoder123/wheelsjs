@@ -6,7 +6,7 @@
  * file that was distributed with this source code.
  */
 
-import { logger } from '@poppinss/cliui'
+import { logger } from './logger'
 import { Server } from './server'
 
 export interface ServerOptions {
@@ -19,7 +19,7 @@ export class App {
 
     public async start(options: ServerOptions): Promise<void> {
         if(options.port) {
-            logger.success(`Starting Wheels HTTP server at 0.0.0.0:${options.port}`)
+            logger.info(`Starting server...`)
             const server = new Server(options, this.middlewares)
             await server.start()
         } else {

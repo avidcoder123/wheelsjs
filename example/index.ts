@@ -5,6 +5,7 @@ const app = new App()
 
 app.use(async function(ctx: HttpContext, next){
     ctx.response.send("HELLO WORLD")
+    throw new Error("Some weird error")
     await next()
 })
 

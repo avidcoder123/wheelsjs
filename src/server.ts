@@ -4,7 +4,8 @@ import { IncomingMessage, ServerResponse, createServer } from 'http'
 import { ServerOptions } from '.'
 import { HttpContextController, HttpContext } from './context'
 import { Middleware } from 'co-compose'
-import { logger } from '@poppinss/cliui'
+import { logger } from './logger'
+import { env } from 'process'
 
 const Youch = require('youch')
 const forTerminal = require('youch-terminal')
@@ -23,16 +24,27 @@ export class Server {
             middleware.register(this.middlewares)
             try {
                 await middleware.runner().finalHandler(this.finalHandler, [ctx]).run([ctx])
+                logger.info(`${req.method.toUpperCase()} ${req.url} ${res.statusCode}`)
             } catch(error) {
-                logger.fatal("FATAL: Error in application")
-                let youch = new Youch(error, req)
-                let terminal_youch = await youch.toJSON()
-                console.log(forTerminal(terminal_youch))
-                let browser_youch = await youch.toHTML()
-                res.writeHead(200, {'content-type': 'text/html'})
-                res.end(browser_youch)
+                if(!(req.url === "/favicon.ico")){
+                    res.statusCode=500
+                    if(env.NODE_ENV === "production") {
+                        logger.error(error)
+                        res.end("500 Internal Server Error")
+                    } else {
+                        logger.info(`${req.method.toUpperCase()} ${req.url} ${res.statusCode}`)
+                        let youch = new Youch(error, req)
+                        let terminal_youch = await youch.toJSON()
+                        logger.fatal(forTerminal(terminal_youch))
+                        let browser_youch = await youch.toHTML()
+                        res.end(browser_youch)
+                    }
+                } else {
+                    res.end()
+                }
             }
-        }).listen(this.options.port)
+        }).listen(this.options.port, "0.0.0.0")
+        logger.success(`Wheels.js HTTP server listening on 0.0.0.0:${this.options.port}`)
     }
 
     private async finalHandler(ctx: HttpContext){
