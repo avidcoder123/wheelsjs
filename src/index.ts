@@ -17,7 +17,9 @@ export interface ServerOptions {
 
 export class App {
 
-    public middlewares: Array<(ctx: HttpContext, next) => Promise<void>> = [Router.handle]
+    public Router = new Router()
+
+    public middlewares: Array<(ctx: HttpContext, next) => Promise<void>> = [this.Router.handle]
 
     public async start(options: ServerOptions): Promise<void> {
         if(options.port) {

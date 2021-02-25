@@ -18,11 +18,11 @@ interface RouteOptions {
 }
 
 export class Router {
-    private static routes: Array<Route> = []
+    private routes: Array<Route> = []
 
-    private static methods: Array<RouteHandler> = []
+    private methods: Array<RouteHandler> = []
 
-    public static route(route: string, handler: Function, opts?: RouteOptions) {
+    public route(route: string, handler: Function, opts?: RouteOptions) {
         let parsedRoute: Route = parse(route)
         this.routes.push(parsedRoute)
         this.methods[JSON.stringify(parsedRoute)] = {
@@ -32,7 +32,7 @@ export class Router {
         }
     }
 
-    public static get(route: string, handler: Function, opts?: RouteOptions) {
+    public get(route: string, handler: Function, opts?: RouteOptions) {
         let parsedRoute: Route = parse(route)
         this.routes.push(parsedRoute)
         this.methods[JSON.stringify(parsedRoute)] = {
@@ -42,7 +42,7 @@ export class Router {
         }
     }
 
-    public static post(route: string, handler: Function, opts?: RouteOptions) {
+    public post(route: string, handler: Function, opts?: RouteOptions) {
         let parsedRoute: Route = parse(route)
         this.routes.push(parsedRoute)
         this.methods[JSON.stringify(parsedRoute)] = {
@@ -52,7 +52,7 @@ export class Router {
         }
     }
 
-    public static put(route: string, handler: Function, opts?: RouteOptions) {
+    public put(route: string, handler: Function, opts?: RouteOptions) {
         let parsedRoute: Route = parse(route)
         this.routes.push(parsedRoute)
         this.methods[JSON.stringify(parsedRoute)] = {
@@ -62,7 +62,7 @@ export class Router {
         }
     }
 
-    public static delete(route: string, handler: Function, opts?: RouteOptions) {
+    public delete(route: string, handler: Function, opts?: RouteOptions) {
         let parsedRoute: Route = parse(route)
         this.routes.push(parsedRoute)
         this.methods[JSON.stringify(parsedRoute)] = {
@@ -72,7 +72,7 @@ export class Router {
         }
     }
 
-    public static patch(route: string, handler: Function, opts?: RouteOptions) {
+    public patch(route: string, handler: Function, opts?: RouteOptions) {
         let parsedRoute: Route = parse(route)
         this.routes.push(parsedRoute)
         this.methods[JSON.stringify(parsedRoute)] = {
@@ -82,13 +82,13 @@ export class Router {
         }
     }
 
-    public static async handle(ctx: HttpContext, next){
+    public async handle(ctx: HttpContext, next){
         const url = ctx.request.parsedUrl.href
-        const matched = match(url, Router.routes)
+        const matched = match(url, this.routes)
         const route_serial = JSON.stringify(matched)
         let routeData: RouteHandler
-        if(Router.methods[route_serial]) {
-            routeData = Router.methods[route_serial]
+        if(this.methods[route_serial]) {
+            routeData = this.methods[route_serial]
             if(routeData.method === "*" || ctx.request.method() === routeData.method) {
                 const params = exec(url, matched)
                 ctx.request.params = params
