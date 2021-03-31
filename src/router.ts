@@ -34,56 +34,6 @@ export class Router {
         }
     }
 
-    public get(route: string, handler: Function, opts?: RouteOptions) {
-        let parsedRoute: Route = parse(route)
-        this.routes.push(parsedRoute)
-        this.methods[JSON.stringify(parsedRoute)] = {
-            method: "GET",
-            handler: handler,
-            opts: opts ? opts : null
-        }
-    }
-
-    public post(route: string, handler: Function, opts?: RouteOptions) {
-        let parsedRoute: Route = parse(route)
-        this.routes.push(parsedRoute)
-        this.methods[JSON.stringify(parsedRoute)] = {
-            method: "POST",
-            handler: handler,
-            opts: opts ? opts : null
-        }
-    }
-
-    public put(route: string, handler: Function, opts?: RouteOptions) {
-        let parsedRoute: Route = parse(route)
-        this.routes.push(parsedRoute)
-        this.methods[JSON.stringify(parsedRoute)] = {
-            method: "PUT",
-            handler: handler,
-            opts: opts ? opts : null
-        }
-    }
-
-    public delete(route: string, handler: Function, opts?: RouteOptions) {
-        let parsedRoute: Route = parse(route)
-        this.routes.push(parsedRoute)
-        this.methods[JSON.stringify(parsedRoute)] = {
-            method: "DELETE",
-            handler: handler,
-            opts: opts ? opts : null
-        }
-    }
-
-    public patch(route: string, handler: Function, opts?: RouteOptions) {
-        let parsedRoute: Route = parse(route)
-        this.routes.push(parsedRoute)
-        this.methods[JSON.stringify(parsedRoute)] = {
-            method: "PATCH",
-            handler: handler,
-            opts: opts ? opts : null
-        }
-    }
-
     public handle = async (ctx: HttpContext, next) => {
         const url = ctx.request.parsedUrl.href
         const matched = match(url, this.routes)
@@ -91,19 +41,13 @@ export class Router {
         let routeData: RouteHandler
         if(this.methods[route_serial]) {
             routeData = this.methods[route_serial]
-            if(routeData.method === "*" || ctx.request.method() === routeData.method) {
-                const params = exec(url, matched)
-                ctx.request.params = params
-                let handlerResponse = await routeData.handler(ctx)
-                if(handlerResponse) {
-                    ctx.response.send(handlerResponse)
-                }
-                await next()
-            } else {
-                ctx.response.status(405)
-                ctx.response.send("405 Method Not Allowed")
-                await next()
+            const params = exec(url, matched)
+            ctx.request.params = params
+            let handlerResponse = await routeData.handler(ctx)
+            if(handlerResponse) {
+                ctx.response.send(handlerResponse)
             }
+            await next()
         } 
         else {
             ctx.response.status(404)
