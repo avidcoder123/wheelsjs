@@ -38,4 +38,6 @@ export class App {
     public after(middleware: (ctx: HttpContext, next) => Promise<void>): void {
         this.middlewares.push(middleware)
     }
+
+    public app = this
 }

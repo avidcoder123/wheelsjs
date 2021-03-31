@@ -24,6 +24,8 @@ export class Router {
 
     private methods: Array<RouteHandler> = []
 
+    public notFound: Function
+
     public route(route: string, handler: Function, opts?: RouteOptions) {
         let parsedRoute: Route = parse(route)
         this.routes.push(parsedRoute)
@@ -51,7 +53,7 @@ export class Router {
         } 
         else {
             ctx.response.status(404)
-            ctx.response.send("404 Not Found")
+            ctx.response.send(await this.notFound(ctx))
             await next()
         }
         
