@@ -21,7 +21,7 @@ export class HttpContextContract {
     private static readonly res_config: ResponseConfigContract = {
         etag: false,
         jsonpCallbackName: 'callback',
-        secret: 'blah',
+        secret: '',
         cookie: {}
     }
 
