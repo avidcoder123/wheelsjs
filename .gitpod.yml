@@ -1,0 +1,2 @@
+tasks:
+  - init: chmod +x setup.sh && ./setup.sh

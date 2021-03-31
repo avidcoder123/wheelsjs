@@ -1,4 +1,3 @@
-'use strict'
 /* 
  * Wheels-lite by AvidCoder123
  * 
@@ -10,6 +9,7 @@ import { logger } from './logger'
 import { Server } from './server'
 import { Router } from './router'
 import { HttpContext } from './context'
+import { $import } from './module'
 
 export interface ServerOptions {
     port: number
@@ -17,7 +17,9 @@ export interface ServerOptions {
 
 export class App {
 
-    public middlewares: Array<(ctx: HttpContext, next) => Promise<void>> = [Router.handle]
+    public Router = $import("Wheels/Core/Router").Router
+
+    public middlewares: Array<(ctx: HttpContext, next) => Promise<void>> = [this.Router.handle]
 
     public async start(options: ServerOptions): Promise<void> {
         if(options.port) {

@@ -33,6 +33,7 @@
     "@types/pino": "^6.3.6",
     "co-compose": "^6.1.0",
     "matchit": "^1.1.0",
+    "needle-ioc": "^1.0.0",
     "pino": "^6.11.1",
     "proxy-addr": "^2.0.6",
     "throng": "^5.0.0",
