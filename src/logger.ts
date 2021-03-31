@@ -1,9 +1,9 @@
 import { env } from 'process'
 import { logger as dev_logs } from '@poppinss/cliui'
-import * as prod_logs from 'pino'
+import Pino from 'pino'
 
 //Some compatibility patching
-let pino = prod_logs()
+let pino = Pino()
 pino.success = pino.info
 pino.warning = pino.warn
 pino.log = pino.info
