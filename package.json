@@ -1,43 +1,43 @@
 {
-  "name": "wheelsjs",
+  "devDependencies": {
+    "@types/node": "^14.14.27"
+  },
+  "name": "wheels-lite",
+  "description": "A feature-packed yet unopinionated Typescript framework.",
   "version": "1.0.0",
-  "description": "A feature-packed yet flexible typescript framework",
   "main": "index.js",
   "directories": {
     "example": "example"
   },
   "scripts": {
-    "test": "npm test"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/avidcoder123/wheelsjs.git"
+    "url": "git+https://github.com/avidcoder123/wheels-lite.git"
   },
   "keywords": [
-    "backend",
-    "fullstack",
-    "laravel",
-    "spring",
-    "django",
-    "rails"
+    "full-featured",
+    "backend"
   ],
   "author": "AvidCoder123",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/avidcoder123/wheelsjs/issues"
+    "url": "https://github.com/avidcoder123/wheels-lite/issues"
   },
-  "homepage": "https://github.com/avidcoder123/wheelsjs#readme",
+  "homepage": "https://github.com/avidcoder123/wheels-lite#readme",
   "dependencies": {
+    "@poppinss/cliui": "^2.1.1",
     "@poppinss/request": "^1.0.14",
     "@poppinss/response": "^1.1.1",
-    "fastify": "^3.15.0",
-    "japa": "^3.1.1",
-    "middie": "^5.2.0",
-    "pino-pretty": "^4.7.1",
-    "reflect-metadata": "^0.1.13",
-    "supertest": "^6.1.3",
-    "tsyringe": "^4.5.0",
-    "youch": "^2.2.1",
-    "youch-terminal": "^1.1.0"
+    "@types/pino": "^6.3.6",
+    "co-compose": "^6.1.0",
+    "matchit": "^1.1.0",
+    "needle-ioc": "^1.0.0",
+    "pino": "^6.11.1",
+    "proxy-addr": "^2.0.6",
+    "throng": "^5.0.0",
+    "youch": "^2.1.1",
+    "youch-terminal": "^1.0.1"
   }
 }
